@@ -19,6 +19,8 @@ const computerSpock = document.querySelector("#computerSpock");
 
 const allGameIcons = document.querySelectorAll(".far");
 
+const jsConfetti = new JSConfetti();
+
 const choices = {
   rock: { name: "Rock", defeats: ["scissors", "lizard"] },
   paper: { name: "Paper", defeats: ["rock", "spock"] },
@@ -87,11 +89,15 @@ const updateScore = function () {
     playerScoreNumber++;
     playerScoreEl.textContent = playerScoreNumber;
   } else if (playerChoice === computerChoice) {
-    clearResult("Draw!", "black");
+    clearResult("It's a tie!", "black");
   } else {
     clearResult("You Losed!", "rgb(235, 43, 52)");
     computerScoreNumber++;
     computerScoreEl.textContent = computerScoreNumber;
+  }
+
+  if (playerScoreNumber === 10) {
+    jsConfetti.addConfetti();
   }
 };
 
