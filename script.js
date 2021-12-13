@@ -27,6 +27,7 @@ const choices = {
 };
 
 let computerChoice = "";
+let playerChoice = "";
 
 // Passing player seelction value and styling icons
 
@@ -37,7 +38,7 @@ const resetSelected = function () {
 };
 
 const computerRandomChoice = function () {
-  const computerChoiceNumber = Math.floor(Math.random() * 4) + 1;
+  const computerChoiceNumber = Math.floor(Math.random() * 5);
   const choicesArr = ["rock", "paper", "scissors", "lizard", "spock"];
   computerChoice = choicesArr[computerChoiceNumber];
 };
@@ -46,12 +47,10 @@ const computerRandomChoice = function () {
 const displayComputerChoice = function () {
   switch (computerChoice) {
     case "rock":
-      console.log("Rock");
       computerRock.classList.add("selected");
       computerChoiceEl.textContent = " --- Rock";
       break;
     case "paper":
-      console.log("Paper");
       computerPaper.classList.add("selected");
       computerChoiceEl.textContent = " --- Paper";
       break;
@@ -73,13 +72,29 @@ const displayComputerChoice = function () {
   }
 };
 
+const whoWins = function () {
+  const result = choices[playerChoice].defeats.includes(computerChoice);
+  if (result) {
+    resultText.textContent = "You Won!";
+    resultText.style.color = "dodgerblue";
+  } else if (playerChoice === computerChoice) {
+    resultText.textContent = "Draw!";
+    resultText.style.color = "black";
+  } else {
+    resultText.textContent = "You Losed!";
+    resultText.style.color = "rgb(235, 43, 52)";
+  }
+};
+
 const checkResult = function () {
   resetSelected();
   computerRandomChoice();
   displayComputerChoice();
+  whoWins();
 };
 
-const select = function (playerChoice) {
+const select = function (choice) {
+  playerChoice = choice;
   checkResult();
   // Add 'selected' styling & playerChoice
   switch (playerChoice) {
