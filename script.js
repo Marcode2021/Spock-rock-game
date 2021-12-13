@@ -3,6 +3,7 @@ const playerChoiceEl = document.querySelector("#playerChoice");
 const computerScoreEl = document.querySelector("#computerScore");
 const computerChoiceEl = document.querySelector("#computerChoice");
 const resultText = document.querySelector("#resultText");
+const resetBtn = document.querySelector(".reset-icon");
 
 const playerRock = document.querySelector("#playerRock");
 const playerPaper = document.querySelector("#playerPaper");
@@ -28,6 +29,8 @@ const choices = {
 
 let computerChoice = "";
 let playerChoice = "";
+let computerScoreNumber = 0;
+let playerScoreNumber = 0;
 
 // Passing player seelction value and styling icons
 
@@ -72,25 +75,44 @@ const displayComputerChoice = function () {
   }
 };
 
-const whoWins = function () {
+const clearResult = function (resultContent, resultColor) {
+  resultText.textContent = resultContent;
+  resultText.style.color = resultColor;
+};
+
+const updateScore = function () {
   const result = choices[playerChoice].defeats.includes(computerChoice);
   if (result) {
-    resultText.textContent = "You Won!";
-    resultText.style.color = "dodgerblue";
+    clearResult("You Won!", "dodgerblue");
+    playerScoreNumber++;
+    playerScoreEl.textContent = playerScoreNumber;
   } else if (playerChoice === computerChoice) {
-    resultText.textContent = "Draw!";
-    resultText.style.color = "black";
+    clearResult("Draw!", "black");
   } else {
-    resultText.textContent = "You Losed!";
-    resultText.style.color = "rgb(235, 43, 52)";
+    clearResult("You Losed!", "rgb(235, 43, 52)");
+    computerScoreNumber++;
+    computerScoreEl.textContent = computerScoreNumber;
   }
+};
+
+const resetGame = function () {
+  computerChoice = "Choice";
+  playerChoice = "Choice";
+  computerScoreNumber = 0;
+  playerScoreNumber = 0;
+  clearResult("Let's start the game", "black");
+  resetSelected();
+  playerChoiceEl.textContent = " --- Choice";
+  computerChoiceEl.textContent = " --- Choice";
+  playerScoreEl.textContent = playerScoreNumber;
+  computerScoreEl.textContent = computerScoreNumber;
 };
 
 const checkResult = function () {
   resetSelected();
   computerRandomChoice();
   displayComputerChoice();
-  whoWins();
+  updateScore();
 };
 
 const select = function (choice) {
@@ -123,3 +145,8 @@ const select = function (choice) {
       break;
   }
 };
+
+//////////////////////////////////////////
+// Event listeners
+
+resetBtn.addEventListener("click", resetGame);
