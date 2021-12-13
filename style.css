@@ -7,18 +7,25 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-
+  background: whitesmoke;
   font-family: Lato, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
+.game-container {
+  background: white;
+  width: 530px;
+  height: 600px;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5);
+}
 
 .header {
   background: dodgerblue;
-
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,10 +47,28 @@ h2 {
 .far {
   font-size: 50px;
   margin-right: 40px;
-  User-select: none;
+  user-select: none;
 }
 
+#player .far,
+#player .choice {
+  color: dodgerblue;
+  cursor: pointer;
+}
 
+#computer .far,
+#computer .choice {
+  color: rgb(235, 43, 52);
+}
+
+.selected {
+  color: black !important;
+}
+
+#player .far:last-of-type,
+#computer .far:last-of-type {
+  margin-right: 0;
+}
 
 .reset-icon {
   font-size: 30px;
@@ -66,8 +91,8 @@ h2 {
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
   .game-container {
-
     height: 580px;
+    width: 95%;
   }
 
   h1 {
@@ -80,6 +105,7 @@ h2 {
 
   .far {
     margin-right: 20px;
+    user-select: none;
   }
 
   .reset-icon {
@@ -92,6 +118,7 @@ h2 {
 @media screen and (max-width: 376px) {
   .game-container {
     height: 550px;
+    width: 95%;
   }
 
   h1 {
